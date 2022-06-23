@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
--- Unidad de control principal del RISCV. Arq0 2022
+-- Unidad de control principal del RISCV. ArqO 2022
 -- G.Sutter jun222
+--
 -- Implementa set reducido de instrucciones
 -- R-type, lw, sw, branches (bnq, bnq), jal, AuiPC, Lui
 --------------------------------------------------------------------------------
@@ -60,9 +61,9 @@ MemRead  <= '1' when opCode = OP_LD else --lw
 MemWrite <= '1' when opCode = OP_ST else -- sw
             '0'; 
 
-ResultSrc <= "01" when opCode = OP_LD  else -- lw
-             "10" when opCode = OP_JAL else -- jal
-             "00"; -- R-type, sw, beq, lui I-type
+ResultSrc<= "01" when opCode = OP_LD  else -- lw
+            "10" when opCode = OP_JAL else -- jal
+            "00"; -- R-type, sw, beq, lui I-type
 
 ALUOP    <= LDST_T when opCode = OP_LD     else -- ld
             LDST_T when opCode = OP_ST     else -- sd
@@ -71,7 +72,7 @@ ALUOP    <= LDST_T when opCode = OP_LD     else -- ld
             BRCH_T when opCode = OP_BRANCH else -- any branch
             R_Type when opCode = OP_RTYPE  else -- R-type;
             I_Type when opCode = OP_ITYPE  else -- I-type;
-            "111"; --Señal de no reconocido o no opera ALU
+            "111"; --Senial de no reconocido o no opera ALU
 
 Ins_jalr <= '1' when opCode = OP_JALR else '0';
 

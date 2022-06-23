@@ -1,7 +1,6 @@
 ---------------------------------------------------------------------------------------------------
--- Universidad Autonoma de Madrid
--- Escuela Politecnica Superior
--- Laboratorio de ARQ0 2021-2022
+-- EPS - UAM
+-- Laboratorio de ARQ0 2022
 --
 -- Testbench simple para el procesador RISC V.
 ---------------------------------------------------------------------------------------------------

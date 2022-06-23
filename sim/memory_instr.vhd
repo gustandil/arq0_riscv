@@ -1,9 +1,8 @@
 --------------------------------------------------------------------------------
--- Universidad Autonoma de Madrid
--- Escuela Politecnica Superior
--- Laboratorio de Arq0 2021-2022
+-- EPS - UAM. Laboratorio de ArqO 2022
 --
--- Memoria sincrona simple.
+-- Memoria de instrucciones simple. For RISC V
+-- Lee fichero de instrucciones exportado desde RARs
 --------------------------------------------------------------------------------
 
 library std;

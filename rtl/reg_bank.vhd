@@ -1,7 +1,5 @@
 --------------------------------------------------------------------------------
--- Universidad Autonoma de Madrid
--- Escuela Politecnica Superior
--- Laboratorio de Arq0 2021-2022
+-- EPS - UAM. Laboratorio de Arq0 2022
 --
 -- Banco completo de registros del microprocesador MIPS/RISCV (el mismo)
 ----------------------------------------------------------------------

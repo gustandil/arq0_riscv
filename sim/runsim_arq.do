@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-# Script ModelSim para la simulacion del procesador Arq2021-2022
+# Script ModelSim para la simulacion del procesador Risc V ArqO 2022
 --------------------------------------------------------------------------------
 
 # Crear library, borrando cualquier compilacion previa:

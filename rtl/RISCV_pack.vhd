@@ -2,7 +2,7 @@
 -- Package for RISCV. Arq0 2022
 -- G.Sutter jun2022
 --
---
+-- Define constantes para diferntes módulos
 --------------------------------------------------------------------------------
 
 library ieee;

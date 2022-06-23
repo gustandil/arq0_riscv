@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
--- Procesador RISC V con pipeline curso Arquitectura 2022
+-- Procesador RISC V uniciclo curso Arquitectura Ordenadores 2022
 -- Initial Release G.Sutter jun 2022
--- (INCLUIR AQUI LA INFORMACION SOBRE LOS AUTORES)
+-- 
 --
 --------------------------------------------------------------------------------
 

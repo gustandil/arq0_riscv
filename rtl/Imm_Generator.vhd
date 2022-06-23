@@ -34,7 +34,6 @@ begin
     JtypeImm  <= X"000" & ( instr(19 downto 12) & instr(20) & instr(30 downto 21) & '0') when instr(31) = '0' else
                 (X"FFF" & ( instr(19 downto 12) & instr(20) & instr(30 downto 21))& '0'); -- instr(31) implicit at position 20
     UtypeImm  <=  instr(31 downto 12) & X"000"; --for LUI & AUIPC
-
  
     opcode <= instr(6 downto 0);
 

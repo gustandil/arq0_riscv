@@ -2,8 +2,8 @@
 -- EPS - UAM. Laboratorio de ARQ 2022
 --
 -- ALU simple for RiscV.
--- * Soporta las operaciones: +, -, and, or, xor, not, slt, opb<<16 (desplazamiento)
--- * Genera el flag Zero (ZFlag) y flag de Signo (SignFlag)
+-- * Soporta las operaciones: +, -, and, or, xor, not, slt
+-- * Genera el flag Zero (ZFlag), flag de Signo (SignFlag) y Carry
 --------------------------------------------------------------------------------
 
 library ieee;
