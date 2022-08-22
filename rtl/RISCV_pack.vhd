@@ -24,7 +24,6 @@ package RISCV_pack is
     constant OP_JAL    : t_opCode := "1101111"; -- Jump and Link
     constant OP_JALR   : t_opCode := "1100111"; -- Jump and Link Register
  
-
     -- Tipo para los codigos de control de la ALU:
     subtype t_aluControl is std_logic_vector (3 downto 0);
     subtype t_aluOP      is std_logic_vector (2 downto 0);

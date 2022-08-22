@@ -1,5 +1,5 @@
 #-----------------------------------------------------
-# Prueba simple para tesstar la ruta de datos
+# Prueba simple para testar la ruta de datos
 # G.Sutter jun 2022
 #
 
@@ -16,7 +16,7 @@ mask2:  .word 0x000000FF
 
 .text
 main:
-	la t0, buffer
+	la t0, buffer         # carga la drección del buffer en t0 (X5)
 	#lui  t0, %hi(buffer)  # Carga la parte alta de la dir buffer
 	#addi t0, t0, %lo(buffer)
 	li t1, 8              # x6 = 8

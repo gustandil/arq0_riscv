@@ -12,17 +12,17 @@ use work.RISCV_pack.all;
 
 entity processorRV is
    port(
-      Clk         : in  std_logic; -- Reloj activo en flanco subida
-      Reset       : in  std_logic; -- Reset asincrono activo nivel alto
+      Clk      : in  std_logic;                     -- Reloj activo en flanco subida
+      Reset    : in  std_logic;                     -- Reset asincrono activo nivel alto
       -- Instruction memory
-      IAddr      : out std_logic_vector(31 downto 0); -- Direccion Instr
-      IDataIn    : in  std_logic_vector(31 downto 0); -- Instruccion leida
+      IAddr    : out std_logic_vector(31 downto 0); -- Direccion Instr
+      IDataIn  : in  std_logic_vector(31 downto 0); -- Instruccion leida
       -- Data memory
-      DAddr      : out std_logic_vector(31 downto 0); -- Direccion
-      DRdEn      : out std_logic;                     -- Habilitacion lectura
-      DWrEn      : out std_logic;                     -- Habilitacion escritura
-      DDataOut   : out std_logic_vector(31 downto 0); -- Dato escrito
-      DDataIn    : in  std_logic_vector(31 downto 0)  -- Dato leido
+      DAddr    : out std_logic_vector(31 downto 0); -- Direccion
+      DRdEn    : out std_logic;                     -- Habilitacion lectura
+      DWrEn    : out std_logic;                     -- Habilitacion escritura
+      DDataOut : out std_logic_vector(31 downto 0); -- Dato escrito
+      DDataIn  : in  std_logic_vector(31 downto 0)  -- Dato leido
    );
 end processorRV;
 
@@ -42,15 +42,15 @@ architecture rtl of processorRV is
 
   component reg_bank
      port (
-        Clk   : in  std_logic; -- Reloj activo en flanco de subida
-        Reset : in  std_logic; -- Reset as�ncrono a nivel alto
+        Clk   : in  std_logic;                      -- Reloj activo en flanco de subida
+        Reset : in  std_logic;                      -- Reset as�ncrono a nivel alto
         A1    : in  std_logic_vector(4 downto 0);   -- Direcci�n para el puerto Rd1
-        Rd1   : out std_logic_vector(31 downto 0); -- Dato del puerto Rd1
+        Rd1   : out std_logic_vector(31 downto 0);  -- Dato del puerto Rd1
         A2    : in  std_logic_vector(4 downto 0);   -- Direcci�n para el puerto Rd2
-        Rd2   : out std_logic_vector(31 downto 0); -- Dato del puerto Rd2
+        Rd2   : out std_logic_vector(31 downto 0);  -- Dato del puerto Rd2
         A3    : in  std_logic_vector(4 downto 0);   -- Direcci�n para el puerto Wd3
         Wd3   : in  std_logic_vector(31 downto 0);  -- Dato de entrada Wd3
-        We3   : in  std_logic -- Habilitaci�n de la escritura de Wd3
+        We3   : in  std_logic                       -- Habilitaci�n de la escritura de Wd3
      ); 
   end component reg_bank;
 
@@ -59,28 +59,28 @@ architecture rtl of processorRV is
         -- Entrada = codigo de operacion en la instruccion:
         OpCode   : in  std_logic_vector (6 downto 0);
         -- Seniales para el PC
-        Branch   : out  std_logic; -- 1 = Ejecutandose instruccion branch
+        Branch   : out  std_logic;                     -- 1 = Ejecutandose instruccion branch
         -- Seniales relativas a la memoria
-        ResultSrc: out  std_logic_vector(1 downto 0); -- 00 salida Alu; 01 = salida de la mem.; 10 PC_plus4
-        MemWrite : out  std_logic; -- Escribir la memoria
-        MemRead  : out  std_logic; -- Leer la memoria
+        ResultSrc: out  std_logic_vector(1 downto 0);  -- 00 salida Alu; 01 = salida de la mem.; 10 PC_plus4
+        MemWrite : out  std_logic;                     -- Escribir la memoria
+        MemRead  : out  std_logic;                     -- Leer la memoria
         -- Seniales para la ALU
         ALUSrc   : out  std_logic;                     -- 0 = oper.B es registro, 1 = es valor inm.
         AuipcLui : out  std_logic_vector (1 downto 0); -- 0 = PC. 1 = zeros, 2 = reg1.
         ALUOp    : out  std_logic_vector (2 downto 0); -- Tipo operacion para control de la ALU
         -- señal generacion salto
-        Ins_jalr  : out  std_logic;  -- 0=any instrucion, 1=jalr
+        Ins_jalr  : out  std_logic;                    -- 0=any instrucion, 1=jalr
         -- Seniales para el GPR
-        RegWrite : out  std_logic  -- 1 = Escribir registro
+        RegWrite : out  std_logic                      -- 1 = Escribir registro
      );
   end component;
 
   component alu_control is
     port (
       -- Entradas:
-      ALUOp  : in std_logic_vector (2 downto 0); -- Codigo de control desde la unidad de control
-      Funct3 : in std_logic_vector (2 downto 0); -- Campo "funct3" de la instruccion (I(14:12))
-      Funct7 : in std_logic_vector (6 downto 0); -- Campo "funct7" de la instruccion (I(31:25))     
+      ALUOp  : in std_logic_vector (2 downto 0);     -- Codigo de control desde la unidad de control
+      Funct3 : in std_logic_vector (2 downto 0);     -- Campo "funct3" de la instruccion (I(14:12))
+      Funct7 : in std_logic_vector (6 downto 0);     -- Campo "funct7" de la instruccion (I(31:25))     
       -- Salida de control para la ALU:
       ALUControl : out std_logic_vector (3 downto 0) -- Define operacion a ejecutar por la ALU
     );
@@ -99,7 +99,6 @@ architecture rtl of processorRV is
   signal Alu_SIGN      : std_logic;
   signal AluControl   : std_logic_vector(3 downto 0);
   signal reg_RD_data  : std_logic_vector(31 downto 0);
-  -- elim signal reg_RD       : std_logic_vector(4 downto 0);
 
   signal branch_true : std_logic;
   signal PC_next        : std_logic_vector(31 downto 0);
@@ -138,7 +137,7 @@ begin
   PC_reg_proc: process(Clk, Reset)
   begin
     if Reset = '1' then
-      PC_reg <= (22 => '1', others => '0'); -- 0400_0000
+      PC_reg <= (22 => '1', others => '0'); -- 0040_0000
     elsif rising_edge(Clk) then
       PC_reg <= PC_next;
     end if;
@@ -186,15 +185,11 @@ begin
     RegWrite => Ctrl_RegWrite
   );
 
---  Inm_ext        <= x"FFFF" & Instruction(15 downto 0) when Instruction(15)='1' else
---                    x"0000" & Instruction(15 downto 0);
-
   inmed_op : Imm_Gen
   port map (
         instr    => Instruction,
         imm      => Inm_ext 
   );
-
 
   Addr_Branch    <= PC_reg + Inm_ext;
   Addr_jalr      <= reg_RS + Inm_ext;
@@ -236,7 +231,6 @@ begin
                 reg_RS; -- any other 
   Alu_Op2    <= reg_RT when Ctrl_ALUSrc = '0' else Inm_ext;
 
-  -- elim reg_RD     <= Instruction(20 downto 16) when Ctrl_RegDest = '0' else Instruction(15 downto 11);
 
   DAddr      <= Alu_Res;
   DDataOut   <= reg_RT;

@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-# Script ModelSim para la simulacion del procesador Risc V ArqO 2022
+# Script QuestalSim para la simulacion del procesador Risc V ArqO 2022
 --------------------------------------------------------------------------------
 
 # Crear library, borrando cualquier compilacion previa:
@@ -14,7 +14,7 @@ vcom -work work -2008 -explicit -check_synthesis ../rtl/reg_bank.vhd
 vcom -work work -2008 -explicit -check_synthesis ../rtl/alu_RV.vhd
 vcom -work work -2008 -explicit -check_synthesis ../rtl/alu_control.vhd
 vcom -work work -2008 -explicit -check_synthesis ../rtl/control_unit.vhd
-vcom -work work -2008 -explicit -check_synthesis ../rtl/imm_generator.vhd
+vcom -work work -2008 -explicit -check_synthesis ../rtl/Imm_Generator.vhd
 vcom -work work -2008 -explicit -check_synthesis ../rtl/processorRV.vhd
 
 # Compilar testbench:

@@ -3,7 +3,7 @@
 -- G.Sutter jun222
 --
 -- Implementa set reducido de instrucciones
--- R-type, lw, sw, branches (bnq, bnq), jal, AuiPC, Lui
+-- R-type, lw, sw, branches (beq, bnq), jal, AuiPC, Lui
 --------------------------------------------------------------------------------
 
 library ieee;
@@ -16,26 +16,26 @@ entity control_unit is
       -- Entrada = codigo de operacion en la instruccion:
       OpCode  : in  std_logic_vector (6 downto 0);
       -- Seniales para el PC
-      Branch : out  std_logic; -- 1 = Ejecutandose instruccion branch
+      Branch : out  std_logic;                       -- 1 = Ejecutandose instruccion branch
       -- Seniales relativas a la memoria
-      ResultSrc: out  std_logic_vector(1 downto 0); -- 00 salida Alu; 01 = salida de la mem.; 10 PC_plus4
-      MemWrite : out  std_logic; -- Escribir la memoria
-      MemRead  : out  std_logic; -- Leer la memoria
-      -- Seniales para la ALU
+      ResultSrc: out  std_logic_vector(1 downto 0);  -- 00 salida Alu; 01 = salida de la mem.; 10 PC_plus4
+      MemWrite : out  std_logic;                     -- Escribir la memoria
+      MemRead  : out  std_logic;                     -- Leer la memoria
+      -- Seniales para la ALU                    
       ALUSrc   : out  std_logic;                     -- 0 = oper.B es registro, 1 = es valor inm.
       AuipcLui : out  std_logic_vector (1 downto 0); -- 0 = PC. 1 = zeros, 2 = reg1.
       ALUOp    : out  std_logic_vector (2 downto 0); -- Tipo operacion para control de la ALU
       -- señal generacion salto
-      Ins_jalr  : out  std_logic;  -- 0=any instrucion, 1=jalr
+      Ins_jalr  : out  std_logic;                    -- 0=any instrucion, 1=jalr
       -- Seniales para el GPR
-      RegWrite : out  std_logic    -- 1=Escribir registro
+      RegWrite : out  std_logic                      -- 1=Escribir registro
    );
 end control_unit;
 
 architecture rtl of control_unit is
 -- Tipo para los codigos de operacion definidos en package
 begin
---   OPCode <= Instr(6 downto 0); -- 7 least significant bits
+-- OPCode <= Instr(6 downto 0); -- 7 least significant bits
 
 Branch   <= '1' when opCode = OP_BRANCH else
             '1' when opCode = OP_JAL    else 
